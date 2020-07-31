@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['web','auth'])->group(function(){
+    Route::get('company','CompanyController@show')->name('company.show');
+    Route::put('company/{company}','CompanyController@update')->name('company.update');
+});
