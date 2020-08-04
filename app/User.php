@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function company(){
+        return $this->belongsTo('App\Company');
+    }
+
+    public function roles(){
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function isAdmin(){
+        $isAdmin = $this->whereHas('roles', function($query){
+            $query->where('description','Administrador');
+        })->count();
+
+        return $isAdmin == 1;
+    }
 }
