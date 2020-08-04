@@ -85,7 +85,7 @@
         $('#roleForm').submit(function(e){
             e.preventDefault();
             let form = $(this).serializeArray()
-            let url = "{{ url('api/v1/roles')  }}"
+            let url = "{{ url('/api/v1/roles')  }}"
             //adecuación para editar
             let id = document.getElementById("id");
             if (id && id.value) {
