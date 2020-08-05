@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Role;
+use App\Post;
+use App\User;
 use Auth;
+use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class PostController extends Controller
 {
-
     public function layout(){
-        return view('role');
+
+/*         if( !Auth::user()->isAdmin() ){
+            return response()->json(['data'=>'Acceso no autorizado']);
+        } */
+
+        return view('posts');
     }
+
 
     /**
      * Display a listing of the resource.
@@ -20,8 +26,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::get(['id','description']);
-        return response()->json(['data'=>$roles]);
+        $posts = Post::with(['users:id'])->get();
+        return response()->json(['data'=>$posts]);
     }
 
     /**
@@ -33,12 +39,17 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $validation = $request->validate([
-            'description' => 'required|string|unique:roles,description',
+            'name' => 'required|string|max:150',
+            'content' => 'required|string'
         ]);
 
-        $role = new Role();
-        $role->description = $request->description;
-        $role->save();
+        $post = new Post();
+        $post->name = $request->name;
+        $post->content = $request->content;
+
+        $user = User::find($post->user_id);
+        $post->user()->associate($user);
+        $post->save();
 
         return ['status'=>'registro agregado exitosamente'];
     }
@@ -64,13 +75,21 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $validation = $request->validate([
-            'description' => 'required|string|unique:roles,description,'.$id,
+            'name' => 'required|string|max:150',
+            'content' => 'required|string'
         ]);
 
-        $role = Role::findOrFail($id);
-        $role->description = $request->description;
-        $role->save();
+        $post = Post::findOrFail($id);
 
+        $post->name = $request->name;
+        $post->content = $request->content;
+
+        $user = User::find($post->user_id);
+
+        $post->user()->dissociate($user);
+        $post->user()->associate($user);
+
+        $post->save();
         return ['status'=>'registro editado exitosamente'];
     }
 
@@ -82,8 +101,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role = Role::findOrFail($id);
-        $role->delete();
+        $post = Post::findOrFail($id);
+        $post->delete();
 
         return ['status'=>'registro eliminado exitosamente'];
     }

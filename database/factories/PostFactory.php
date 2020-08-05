@@ -11,3 +11,4 @@ $factory->define(Post::class, function (Faker $faker) {
         'content' => $faker->text,
     ];
 });
+

@@ -12,7 +12,7 @@ class CompanySeeder extends Seeder
     public function run()
     {
         $records=array(
-            array('name'=>'CIEECH', 'phone'=>'1234567890', 'email'=>'info@cieech.com', 'address'=>'Riobamba'),
+            array('name'=>"Let's Code ", 'phone'=>'1234567890', 'email'=>'info@letscode.com', 'address'=>'Riobamba'),
         );
 
         DB::table('companies')->insert($records);
