@@ -45,6 +45,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    //relación de uno a varios
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
     public function isAdmin(){
         $isAdmin = $this->whereHas('roles', function($query){
             $query->where('description','Administrador');

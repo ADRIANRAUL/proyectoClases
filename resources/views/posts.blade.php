@@ -51,12 +51,13 @@
                         </div>
                         <div class="row">
                             <div class="col p-4">
-                                <table id="userTable" class="table table-striped">
+                                <table id="postTable" class="table table-striped">
                                     <thead>
                                     <tr>
                                         <th>Id</th>
                                         <th>Nombre</th>
                                         <th>Contenido</th>
+                                        <th>Acciones</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -115,8 +116,9 @@
             })
         })
         $(document).on('click','button.delete-post',function(){
-            if (confirm('¿Desea realmente eliminar el registro?')) {
-                let id =  $(this).data('id');
+            let id =  $(this).data('id');
+            if (confirm('¿Desea realmente eliminar el registro? '+id)) {
+                
                 $.ajax({
                     type: "POST",
                     url: "{{ url('api/v1/posts')  }}"+"/"+id,
@@ -139,8 +141,12 @@
         })
         //se ejecuta cuando se da click en el botón editar
         $(document).on('click','button.edit-post',function(){
-            fillForm($(this).data('post'));
-            openModal();
+            let idPost =  $(this).data('id');
+            console.log(idPost);
+
+/*             fillForm($(this).data('Post'));
+            
+            openModal(); */
         });
         //se ejecuta cuando se da click en el botón eliminar
         $(document).on('click','button#closeForm',function(){

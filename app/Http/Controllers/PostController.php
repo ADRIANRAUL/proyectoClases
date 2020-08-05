@@ -26,7 +26,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['users:id'])->get();
+        // en este caso en with debe ir singular porque así está en el modelo
+        // y el post solo tiene un usuario que publica
+        $posts = Post::with(['user:id,name'])->get();
         return response()->json(['data'=>$posts]);
     }
 
@@ -47,7 +49,10 @@ class PostController extends Controller
         $post->name = $request->name;
         $post->content = $request->content;
 
-        $user = User::find($post->user_id);
+        // $user = User::find($post->user_id);
+        // se puede realizar de esta forma
+        // ya que publica el post el usuario logueado
+        $user = User::find(\Auth::user()->id); 
         $post->user()->associate($user);
         $post->save();
 
@@ -79,13 +84,16 @@ class PostController extends Controller
             'content' => 'required|string'
         ]);
 
+         
+
         $post = Post::findOrFail($id);
 
         $post->name = $request->name;
         $post->content = $request->content;
 
-        $user = User::find($post->user_id);
+        $user = User::find(\Auth::user()->id);
 
+        
         $post->user()->dissociate($user);
         $post->user()->associate($user);
 
