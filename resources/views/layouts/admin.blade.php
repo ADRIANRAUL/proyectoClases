@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} - admin</title>
+    <title>{{ config('app.name', 'Lets Code') }} - admin</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Lets Code') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -67,9 +67,9 @@
                                     <a href="{{ route('company.show') }}" @if( Route::getCurrentRoute()->getName() == 'company.show' ) class="list-group-item active" @else class="list-group-item" @endif > Empresa </a>
                                     <a href="{{ route('role.layout') }}" @if( Route::getCurrentRoute()->getName() == 'role.layout' ) class="list-group-item active" @else class="list-group-item" @endif > Roles </a>
                                     <a href="{{ route('users.layout') }}" @if( Route::getCurrentRoute()->getName() == 'users.layout' ) class="list-group-item active" @else class="list-group-item" @endif > Usuarios </a>
-                                    <a href="" @if( Route::getCurrentRoute()->getName() == 'posts.layout' ) class="list-group-item active" @else class="list-group-item" @endif > Publicaciones </a>
+                                    <a href="{{ route('posts.layout') }}" @if( Route::getCurrentRoute()->getName() == 'posts.layout' ) class="list-group-item active" @else class="list-group-item" @endif > Publicaciones </a>
                                 @else
-                                    <a href="" @if( Route::getCurrentRoute()->getName() == 'posts.layout' ) class="list-group-item active" @else class="list-group-item" @endif > Publicaciones </a>
+                                    <a href="{{ route('posts.layout') }}" @if( Route::getCurrentRoute()->getName() == 'posts.layout' ) class="list-group-item active" @else class="list-group-item" @endif > Publicaciones </a>
                                 @endif
                             </div>
                         </div>
