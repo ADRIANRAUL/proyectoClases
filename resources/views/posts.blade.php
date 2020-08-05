@@ -141,12 +141,10 @@
         })
         //se ejecuta cuando se da click en el botón editar
         $(document).on('click','button.edit-post',function(){
-            let idPost =  $(this).data('id');
-            console.log(idPost);
-
-/*             fillForm($(this).data('Post'));
+           
+            fillForm($(this).data('Post'));
             
-            openModal(); */
+            openModal();
         });
         //se ejecuta cuando se da click en el botón eliminar
         $(document).on('click','button#closeForm',function(){
