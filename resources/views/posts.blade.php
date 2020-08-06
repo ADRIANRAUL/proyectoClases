@@ -82,7 +82,7 @@
                 {
                     "mData": "id",
                     "mRender": function(data,type,row){
-                        return "<button class='edit-post' data-user='"+ JSON.stringify(row) +"'>editar</button>" +
+                        return "<button class='edit-post' data-post='"+ JSON.stringify(row) +"'>editar</button>" +
                             "<button class='delete-post' data-id='"+ row.id +"' >eliminar</button>"
                     }
                 }
@@ -142,7 +142,7 @@
         //se ejecuta cuando se da click en el botón editar
         $(document).on('click','button.edit-post',function(){
            
-            fillForm($(this).data('Post'));
+            fillForm($(this).data('post'));
             
             openModal();
         });

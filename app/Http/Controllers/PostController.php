@@ -84,16 +84,12 @@ class PostController extends Controller
             'content' => 'required|string'
         ]);
 
-         
-
         $post = Post::findOrFail($id);
 
         $post->name = $request->name;
         $post->content = $request->content;
 
         $user = User::find(\Auth::user()->id);
-
-        
         $post->user()->dissociate($user);
         $post->user()->associate($user);
 

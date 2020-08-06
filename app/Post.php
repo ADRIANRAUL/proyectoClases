@@ -11,11 +11,11 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function isAdmin(){
+/*     public function isAdmin(){
         $isAdmin = $this->whereHas('roles', function($query){
             $query->where('description','Administrador');
         })->count();
 
         return $isAdmin == 1;
-    }
+    } */
 }
